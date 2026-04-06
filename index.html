@@ -3,18 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile generator</title>
+    <title>GitHub Profile Generator</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
-    <h1>Welcome to the profile generator</h1>
-    <p>Please click the button below to generate your profile.</p>
-    <div class="profile">
-    <input type="text" placeholder="Enter user name" id="input">
-    <button id="btn">Search</button>
-    </div>
-    <div class="result"></div>
+
+    <header class="hero">
+        <div class="hero-text">
+            <h1>GitHub Profile Generator</h1>
+            <p>Turn any GitHub profile into a powerful developer card with stats, personality, and insights — instantly.</p>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Enter GitHub username..." id="input">
+            <button id="btn">Search</button>
+        </div>
+    </header>
+
+    <main class="main" id="main" style="display:none;">
+
+        <section class="profile-card" id="result">
+            <img src="" alt="avatar" id="avatar">
+            <h2 id="name"></h2>
+            <p class="bio" id="bio"></p>
+            <div class="meta">
+                <div class="meta-item"><span class="meta-icon">👥</span><span id="metaFollowers"></span></div>
+                <div class="meta-item"><span class="meta-icon">📁</span><span id="metaRepos"></span></div>
+                <div class="meta-item"><span class="meta-icon">➡️</span><span id="metaFollowing"></span></div>
+            </div>
+            <a href="#" id="profileLink" target="_blank" class="github-link">View on GitHub →</a>
+            <button id="downloadBtn">⬇ Download PDF</button>
+        </section>
+
+        <section class="rpg-card" id="rpgCard">
+            <div class="rpg-top">
+                <div class="rpg-header">
+                    <span class="class-icon" id="classIcon"></span>
+                    <div>
+                        <div class="class-name" id="className"></div>
+                        <div class="class-sub" id="classSub"></div>
+                    </div>
+                </div>
+
+                <div class="rpg-stats">
+                    <div class="rpg-stat">
+                        <div class="stat-row">
+                            <span class="stat-label">⚔️ Strength (repos)</span>
+                            <span class="stat-val" id="valStr"></span>
+                        </div>
+                        <div class="bar-track"><div class="bar-fill str" id="barStr"></div></div>
+                    </div>
+                    <div class="rpg-stat">
+                        <div class="stat-row">
+                            <span class="stat-label">💜 Charisma (followers)</span>
+                            <span class="stat-val" id="valCha"></span>
+                        </div>
+                        <div class="bar-track"><div class="bar-fill cha" id="barCha"></div></div>
+                    </div>
+                    <div class="rpg-stat">
+                        <div class="stat-row">
+                            <span class="stat-label">🟢 Wisdom (following)</span>
+                            <span class="stat-val" id="valWis"></span>
+                        </div>
+                        <div class="bar-track"><div class="bar-fill wis" id="barWis"></div></div>
+                    </div>
+                    <div class="rpg-stat">
+                        <div class="stat-row">
+                            <span class="stat-label">🔵 Mana (gists)</span>
+                            <span class="stat-val" id="valMana"></span>
+                        </div>
+                        <div class="bar-track"><div class="bar-fill mana" id="barMana"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="roast-box">
+                <div class="roast-label"> REALITY CHECK</div>
+                <div class="roast-text" id="roastText">Generating roast...</div>
+            </div>
+        </section>
+
+    </main>
+    <script src="https://js.puter.com/v2/"></script>
     <script src="script.js"></script>
 </body>
 </html>

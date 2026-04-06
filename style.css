@@ -1,72 +1,269 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
+ 
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f5f0eb;
+    display: flex;
+    flex-direction: column;
+}
+ 
+.hero {
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: 1.5px solid #e2d9d0;
+    padding: 48px 60px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+ 
+.hero-text h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+}
+ 
+.hero-text p {
+    font-size: 15px;
+    color: #6b6b6b;
+    max-width: 480px;
+    line-height: 1.6;
+}
+ 
+.search-bar {
+    display: flex;
+    gap: 10px;
+    flex-shrink: 0;
+}
+ 
+input {
+    padding: 11px 16px;
+    width: 260px;
+    border: 1.5px solid #d6cfc8;
+    border-radius: 8px;
+    background-color: #faf8f5;
+    color: #1a1a1a;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+ 
+input::placeholder { color: #bbb; }
+input:focus { border-color: #c07850; }
+ 
+button {
+    padding: 11px 24px;
+    background-color: #c07850;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+ 
+button:hover { background-color: #a8623e; }
+ 
+
+.main {
+    flex: 1;
+}
+ 
+.profile-card {
+    width: 340px;
+    flex-shrink: 0;
+    background-color: #ffffff;
+    border-right: 1.5px solid #e2d9d0;
+    padding: 40px 32px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-}
-h1{
-    color: #333;
-    margin-bottom: 10px;
-}
-p{
-    color: #666;
-    margin-bottom: 20px;
-}
-.profile{
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-input{
-    padding: 10px;
-    width: 200px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-button{
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-button:hover{
-    background-color: #0056b3;
-}
-.result{
-    width: 300px;
-    padding: 20px;
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     text-align: center;
+    gap: 10px;
 }
-.result img{
+ 
+.profile-card img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    margin-bottom: 10px;
+    object-fit: cover;
+    border: 3px solid #e2d9d0;
+    margin-bottom: 4px;
 }
-.result h2{
-    color: #333;
-    margin-bottom: 5px;
+ 
+.profile-card h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1a1a1a;
 }
-.result p{
-    color: #666;
+ 
+.bio {
+    font-size: 13px;
+    color: #6b6b6b;
+    line-height: 1.6;
 }
-.result a{
-    color: #007bff;
+ 
+.meta {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 6px 0;
+}
+ 
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f9f5f1;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: #4a4a4a;
+}
+ 
+.meta-icon { font-size: 16px; }
+ 
+.github-link {
+    color: #c07850;
     text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 4px;
 }
-.result a:hover{
-    text-decoration: underline;
+ 
+.github-link:hover { text-decoration: underline; }
+ 
+#downloadBtn {
+    width: 100%;
+    margin-top: 6px;
+    background-color: #f5f0eb;
+    border: 1.5px solid #d6cfc8;
+    color: #4a4a4a;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 11px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
+ 
+#downloadBtn:hover { background-color: #ede5dc; }
+ 
+.rpg-card {
+    flex: 1;
+    background-color: #fdfaf7;
+    padding: 35px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+ 
+.rpg-top {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+ 
+.rpg-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 1.5px solid #ede5dc;
+}
+ 
+.class-icon { font-size: 36px; }
+ 
+.class-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+ 
+.class-sub {
+    font-size: 13px;
+    color: #999;
+    margin-top: 3px;
+}
+ 
+.rpg-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 48px;
+}
+ 
+.rpg-stat { display: flex; flex-direction: column; gap: 6px; }
+ 
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+ 
+.stat-label { font-size: 12px; color: #888; }
+.stat-val   { font-size: 12px; color: #bbb; }
+ 
+.bar-track {
+    background: #ede5dc;
+    border-radius: 4px;
+    height: 8px;
+}
+ 
+.bar-fill {
+    height: 8px;
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.8s ease;
+}
+ 
+.bar-fill.str  { background-color: #e05c4a; }
+.bar-fill.cha  { background-color: #9b6dbf; }
+.bar-fill.wis  { background-color: #4aab6d; }
+.bar-fill.mana { background-color: #4a8fd4; }
+ 
+.roast-box {
+    border-left: 4px solid #c07850;
+    padding: 16px 20px;
+    background-color: #fdf3ec;
+    border-radius: 0 8px 8px 0;
+}
+ 
+.roast-label {
+    font-size: 11px;
+    color: #c07850;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+}
+ 
+.roast-text {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.7;
+    font-style: italic;
+}
+ 
+
+@media (max-width: 768px) {
+    .hero { padding: 32px 24px; }
+    .main { flex-direction: column; min-height: auto; }
+    .profile-card { width: 100%; border-right: none; border-bottom: 1.5px solid #e2d9d0; }
+    .rpg-card { padding: 32px 24px; }
+    .rpg-stats { grid-template-columns: 1fr; gap: 16px; }
+    .search-bar { width: 100%; }
+    input { width: 100%; flex: 1; }
+}
+ 
