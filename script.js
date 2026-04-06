@@ -2,6 +2,7 @@ const btn = document.querySelector('#btn');
 const input = document.querySelector('#input');
 const main = document.querySelector('#main');
 
+
 btn.addEventListener('click', () => {
     const userName = input.value.trim();
     if (userName !== '') getProfile(userName);
@@ -29,11 +30,10 @@ function getProfile(userName) {
                 .then(repos => {
                     displayResult(data);
                     displayRPG(data, repos);
-                    getRoast(data, repos);
                 })
                 .catch(() => {
                     displayResult(data);
-                    
+                    displayRPG(data, []);
                 });
         })
         .catch(err => {
@@ -57,10 +57,16 @@ function displayResult(data) {
 
 function getTopLanguage(repos) {
     const langs = {};
+
     repos.forEach(r => {
-        if (r.language) langs[r.language] = (langs[r.language] || 0) + 1;
+        if (r.language) {
+            langs[r.language] = (langs[r.language] || 0) + 1;
+        }
     });
-    return Object.keys(langs).sort((a, b) => langs[b] - langs[a])[0] || null;
+
+    const sorted = Object.keys(langs).sort((a, b) => langs[b] - langs[a]);
+
+    return sorted.length > 0 ? sorted[0] : 'JavaScript'; // fallback
 }
 
 function getRPGClass(lang) {
@@ -108,30 +114,9 @@ function displayRPG(data, repos) {
     document.querySelector('#valWis').textContent  = data.following + ' / 500';
     document.querySelector('#valMana').textContent = (data.public_gists || 0) + ' / 50';
 
-    document.querySelector('#roastText').textContent =
-    'Thanks for visiting!   Explore more profiles and keep building awesome stuff.';
+    document.querySelector('#roastText').textContent ="Thanks for visiting — keep searching and exploring.";
 }
 
-async function getRoast(data, repos) {
-    const topLang = getTopLanguage(repos);
-    const rpg = getRPGClass(topLang);
-
-    const prompt = `You are a savage but lovable roast comedian. Roast this GitHub developer in 2-3 funny sentences. Be witty, specific, and a little mean but not actually hurtful. Keep it under 60 words.
-
-Developer stats:
-- Username: ${data.login}
-- Name: ${data.name || 'No name (suspicious)'}
-- Bio: ${data.bio || 'No bio (even more suspicious)'}
-- Public repos: ${data.public_repos}
-- Followers: ${data.followers}
-- Following: ${data.following}
-- Top language: ${topLang || 'Unknown'}
-- RPG Class: ${rpg.name}
-
-Roast them now:`;
-
-    
-}
 
 
 async function downloadPDF(data) {
