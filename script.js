@@ -15,8 +15,71 @@ input.addEventListener('keypress', (e) => {
     }
 });
 
+function resetAnimations() {
+    const els = document.querySelectorAll('.anim-fade-up, .anim-fade, .anim-scale');
+    els.forEach(el => {
+        el.classList.remove('anim-fade-up', 'anim-fade', 'anim-scale');
+        el.style.opacity = '0';
+    });
+}
+
+function animate(selector, animClass, delayMs) {
+    const el = document.querySelector(selector);
+    if (!el) return;
+    setTimeout(() => {
+        el.style.opacity = '';
+        el.classList.add(animClass);
+    }, delayMs);
+}
+
+function animateAll(selectors, animClass, startDelay, stagger) {
+    selectors.forEach((sel, i) => {
+        const els = document.querySelectorAll(sel);
+        els.forEach(el => {
+            setTimeout(() => {
+                el.style.opacity = '';
+                el.classList.add(animClass);
+            }, startDelay + i * stagger);
+        });
+    });
+}
+
+function runAnimations() {
+
+    animate('#avatar',          'anim-scale',    0);
+    animate('#name',            'anim-fade-up', 120);
+    animate('#bio',             'anim-fade-up', 200);
+
+    const metaItems = document.querySelectorAll('.meta-item');
+    metaItems.forEach((el, i) => {
+        setTimeout(() => {
+            el.style.opacity = '';
+            el.classList.add('anim-fade-up');
+        }, 280 + i * 80);
+    });
+
+    animate('.profile-card', 'anim-fade', 0);
+
+    
+    animate('.rpg-card',    'anim-fade-up',  150);
+    animate('.rpg-header',  'anim-fade-up',  250);
+
+    
+    const stats = document.querySelectorAll('.rpg-stat');
+    stats.forEach((el, i) => {
+        setTimeout(() => {
+            el.style.opacity = '';
+            el.classList.add('anim-fade-up');
+        }, 380 + i * 100);
+    });
+
+    
+    animate('.roast-box', 'anim-fade-up', 700);
+}
+
 function getProfile(userName) {
     main.style.display = 'none';
+    resetAnimations();
 
     fetch(`https://api.github.com/users/${userName}`)
         .then(res => res.json())
@@ -30,10 +93,14 @@ function getProfile(userName) {
                 .then(repos => {
                     displayResult(data);
                     displayRPG(data, repos);
+                    main.style.display = 'flex';
+                    runAnimations();
                 })
                 .catch(() => {
                     displayResult(data);
                     displayRPG(data, []);
+                    main.style.display = 'flex';
+                    runAnimations();
                 });
         })
         .catch(err => {
@@ -46,27 +113,40 @@ function displayResult(data) {
     document.querySelector('#avatar').src = data.avatar_url;
     document.querySelector('#name').textContent = data.name || data.login;
     document.querySelector('#bio').textContent = data.bio || 'No bio available';
-    document.querySelector('#metaFollowers').textContent = data.followers + ' Followers';
-    document.querySelector('#metaRepos').textContent = data.public_repos + ' Public Repos';
-    document.querySelector('#metaFollowing').textContent = 'Following ' + data.following;
+
+    document.querySelector('#metaRepos').innerHTML = `
+        <div class="icon-box red">⚔️</div>
+        <div class="mi-text">
+            <span class="mi-label">Repos</span>
+            <span class="mi-val">${data.public_repos} Public</span>
+        </div>`;
+
+    document.querySelector('#metaFollowers').innerHTML = `
+        <div class="icon-box purple">👁️</div>
+        <div class="mi-text">
+            <span class="mi-label">Followers</span>
+            <span class="mi-val">${data.followers}</span>
+        </div>`;
+
+    document.querySelector('#metaFollowing').innerHTML = `
+        <div class="icon-box blue">📖</div>
+        <div class="mi-text">
+            <span class="mi-label">Following</span>
+            <span class="mi-val">${data.following}</span>
+        </div>`;
+
     document.querySelector('#profileLink').href = data.html_url;
     document.querySelector('#downloadBtn').onclick = () => downloadPDF(data);
-    main.style.display = 'flex';
 }
 
 
 function getTopLanguage(repos) {
     const langs = {};
-
     repos.forEach(r => {
-        if (r.language) {
-            langs[r.language] = (langs[r.language] || 0) + 1;
-        }
+        if (r.language) langs[r.language] = (langs[r.language] || 0) + 1;
     });
-
     const sorted = Object.keys(langs).sort((a, b) => langs[b] - langs[a]);
-
-    return sorted.length > 0 ? sorted[0] : 'JavaScript'; // fallback
+    return sorted.length > 0 ? sorted[0] : 'JavaScript';
 }
 
 function getRPGClass(lang) {
@@ -114,9 +194,8 @@ function displayRPG(data, repos) {
     document.querySelector('#valWis').textContent  = data.following + ' / 500';
     document.querySelector('#valMana').textContent = (data.public_gists || 0) + ' / 50';
 
-    document.querySelector('#roastText').textContent ="Thanks for visiting — keep searching and exploring.";
+    document.querySelector('#roastText').textContent = "Thanks for visiting — keep searching and exploring.";
 }
-
 
 
 async function downloadPDF(data) {

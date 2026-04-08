@@ -22,8 +22,6 @@
             <h1>GitHub Profile <span class="highlight">Generator</span></h1>
             <p>Search any GitHub username — get their profile card, RPG class, stat bars, and an AI roast instantly.</p>
 
-           
-
             <div class="search-bar">
                 <input type="text" placeholder="Enter any GitHub username..." id="input">
                 <button id="btn">Search →</button>
@@ -39,11 +37,14 @@
             <img src="" alt="avatar" id="avatar">
             <h2 id="name"></h2>
             <p class="bio" id="bio"></p>
+
             <div class="meta">
-                <div class="meta-item"><span class="meta-icon">👥</span><span id="metaFollowers"></span></div>
-                <div class="meta-item"><span class="meta-icon">📁</span><span id="metaRepos"></span></div>
-                <div class="meta-item"><span class="meta-icon">➡️</span><span id="metaFollowing"></span></div>
+                
+                <div class="meta-item" id="metaRepos"></div>
+                <div class="meta-item" id="metaFollowers"></div>
+                <div class="meta-item" id="metaFollowing"></div>
             </div>
+
             <a href="#" id="profileLink" target="_blank" class="github-link">View on GitHub →</a>
             <button id="downloadBtn">⬇ Download PDF</button>
         </section>
@@ -75,14 +76,14 @@
                     </div>
                     <div class="rpg-stat">
                         <div class="stat-row">
-                            <span class="stat-label">🟢 Wisdom (following)</span>
+                            <span class="stat-label">📖 Wisdom (following)</span>
                             <span class="stat-val" id="valWis"></span>
                         </div>
                         <div class="bar-track"><div class="bar-fill wis" id="barWis"></div></div>
                     </div>
                     <div class="rpg-stat">
                         <div class="stat-row">
-                            <span class="stat-label">🔵 Mana (gists)</span>
+                            <span class="stat-label">✨ Mana (gists)</span>
                             <span class="stat-val" id="valMana"></span>
                         </div>
                         <div class="bar-track"><div class="bar-fill mana" id="barMana"></div></div>
