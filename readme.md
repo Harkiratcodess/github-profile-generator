@@ -93,7 +93,7 @@ No API key required for basic usage. Rate limit: **60 requests/hour** for unauth
 
 **Backend Architect**
 - GitHub: [@Harkiratcodess](https://github.com/Harkiratcodess)
-- LinkedIn: [Harkirat singh](www.linkedin.com/in/harkirat-singh-79ab213b7)
+- LinkedIn: [Harkirat singh](https://www.linkedin.com/in/harkirat-singh-79ab213b77)
 
 ---
 
